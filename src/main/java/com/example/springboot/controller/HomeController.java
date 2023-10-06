@@ -1,9 +1,12 @@
 package com.example.springboot.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +29,15 @@ public class HomeController {
 	@GetMapping("student")
 	public List<Student> getStudent(){
 		return repository.findAll();
+	}
+	@DeleteMapping("student/{id}")
+	public void deleteStudent(@PathVariable ("id") Long studId) {
+		repository.deleteById(studId);
+	}
+	
+	@GetMapping("student/{id}")
+	public Optional<Student> findStudent(@PathVariable("id") Long studId) {
+		return repository.findById(studId);
 	}
 
 	/*public String getMessage() {
